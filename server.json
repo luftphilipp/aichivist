@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.luftphilipp/aichivist",
+  "title": "aichivist",
+  "description": "Clean up your files like an archivist: rename, sort, de-duplicate with plans you approve and undo.",
+  "repository": {
+    "url": "https://github.com/luftphilipp/aichivist",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/luftphilipp/aichivist/releases/download/v0.1.0/aichivist-0.1.0.mcpb",
+      "fileSha256": "d16bc32a2a46d776811102820bcddba181d552a1b46add6537a3f1d569ec6ceb",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
