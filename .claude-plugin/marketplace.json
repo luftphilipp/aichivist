@@ -1,0 +1,14 @@
+{
+  "name": "aichivist",
+  "owner": {
+    "name": "Philipp Luft"
+  },
+  "plugins": [
+    {
+      "name": "aichivist",
+      "description": "An AI file clerk that works like an archivist: filing plans you approve, consistent names, catalogs, closed collections with fixity and full-text index, BagIt export, and a guard that keeps raw mv/rm out of your filing areas.",
+      "source": "./plugin",
+      "category": "productivity"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install ruff mypy
+      - run: ruff check aichivist tests examples extension
+      - run: mypy aichivist
+      - name: plugin manifests are valid JSON
+        run: python -c "import json; [json.load(open(f)) for f in ['.claude-plugin/marketplace.json', 'plugin/.claude-plugin/plugin.json', 'plugin/hooks/hooks.json']]"
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.9", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install pypdf "mcp; python_version >= '3.10'"
+      - run: python -m unittest discover -s tests -v
+      - name: command line works after install
+        run: |
+          python -m pip install .
+          aichivist --version

@@ -1,0 +1,17 @@
+{
+  "description": "Blocks raw mv/rm/delete commands in protected filing areas (see `aichivist protected`) so every change goes through aichivist and stays logged and undoable. Stays silent until the aichivist CLI is installed.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if command -v aichivist >/dev/null 2>&1; then aichivist guard; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

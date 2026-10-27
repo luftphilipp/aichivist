@@ -1,0 +1,8 @@
+{
+  "name": "aichivist",
+  "description": "Archival-grade filing for Claude Code: guided setup, filing plans with human approval, catalogs, open/closed collections, and a guard hook for protected areas. Requires the aichivist CLI (pip install aichivist).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Philipp Luft"
+  }
+}

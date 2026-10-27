@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aichivist"
+version = "0.1.0"
+description = "Clean up your files like an archivist: AI agents rename, sort and de-duplicate documents with plans you approve and full undo"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = []
+keywords = ["archive", "records-management", "file-organizer", "bagit", "fixity", "claude-code", "ai-agent"]
+classifiers = [
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Archiving",
+]
+
+[project.optional-dependencies]
+pdf = ["pypdf>=4"]
+mcp = ["mcp>=1.10; python_version >= '3.10'"]
+
+[project.urls]
+Homepage = "https://github.com/luftphilipp/aichivist"
+Changelog = "https://github.com/luftphilipp/aichivist/blob/main/CHANGELOG.md"
+
+[project.scripts]
+aichivist = "aichivist.cli:main"
+
+[tool.setuptools]
+packages = ["aichivist"]
+
+[tool.setuptools.package-data]
+aichivist = ["ocr_mac.js", "ocr_windows.ps1"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+ignore = ["UP006", "UP035"]  # keep typing.List etc. readable for Python 3.9
+
+[tool.ruff.lint.isort]
+known-first-party = ["aichivist", "helpers"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = true

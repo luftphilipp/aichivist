@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="404" viewBox="0 0 900 404" role="img" aria-label="What aichivist does: reads scans, names files in your style, finds duplicates, keeps programs working, seals finished folders, handles retention periods, checks your backups, keeps private folders invisible.">
+  <style>
+    .h{font:600 15px -apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#24292f}
+    .p{font:13px -apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#57606a}
+    .i{font:28px -apple-system,Segoe UI,Apple Color Emoji,Segoe UI Emoji,sans-serif}
+    .new{font:700 10px -apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#ffffff}
+  </style>
+  <rect width="900" height="404" rx="16" fill="#ffffff"/>
+  <g transform="translate(20 20)">
+    <rect width="203" height="174" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text class="i" x="18" y="48">🔍</text>
+    <text class="h" x="18" y="88">Reads scans</text>
+    <text class="p" x="18" y="112">Letters, PDFs, photos –</text>
+    <text class="p" x="18" y="132">built-in text recognition</text>
+    <text class="p" x="18" y="152">on Mac and Windows.</text>
+  </g>
+  <g transform="translate(239 20)">
+    <rect width="203" height="174" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text class="i" x="18" y="48">✍️</text>
+    <text class="h" x="18" y="88">Names in your style</text>
+    <text class="p" x="18" y="112">Date, sender, what it is –</text>
+    <text class="p" x="18" y="132">learned from the names</text>
+    <text class="p" x="18" y="152">you already use.</text>
+  </g>
+  <g transform="translate(458 20)">
+    <rect width="203" height="174" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text class="i" x="18" y="48">👯</text>
+    <text class="h" x="18" y="88">Finds duplicates</text>
+    <text class="p" x="18" y="112">Exact copies – and the</text>
+    <text class="p" x="18" y="132">same letter scanned</text>
+    <text class="p" x="18" y="152">a second time.</text>
+  </g>
+  <g transform="translate(677 20)">
+    <rect width="203" height="174" rx="14" fill="#f3fbf5" stroke="#bfe8c9"/>
+    <text class="i" x="18" y="48">🎮</text>
+    <rect x="147" y="16" width="40" height="18" rx="9" fill="#1a7f37"/><text class="new" x="155" y="29">NEW</text>
+    <text class="h" x="18" y="88">Programs keep working</text>
+    <text class="p" x="18" y="112">Game, photo library or</text>
+    <text class="p" x="18" y="132">app data? Left in place –</text>
+    <text class="p" x="18" y="152">or moved with a link.</text>
+  </g>
+  <g transform="translate(20 210)">
+    <rect width="203" height="174" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text class="i" x="18" y="48">🔒</text>
+    <text class="h" x="18" y="88">Seals finished folders</text>
+    <text class="p" x="18" y="112">Last year's taxes: locked,</text>
+    <text class="p" x="18" y="132">checked for damage,</text>
+    <text class="p" x="18" y="152">searchable word by word.</text>
+  </g>
+  <g transform="translate(239 210)">
+    <rect width="203" height="174" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text class="i" x="18" y="48">🗓</text>
+    <text class="h" x="18" y="88">Knows when to let go</text>
+    <text class="p" x="18" y="112">Retention period over?</text>
+    <text class="p" x="18" y="132">You choose: long-term</text>
+    <text class="p" x="18" y="152">archive or delete.</text>
+  </g>
+  <g transform="translate(458 210)">
+    <rect width="203" height="174" rx="14" fill="#f3fbf5" stroke="#bfe8c9"/>
+    <text class="i" x="18" y="48">💾</text>
+    <rect x="147" y="16" width="40" height="18" rx="9" fill="#1a7f37"/><text class="new" x="155" y="29">NEW</text>
+    <text class="h" x="18" y="88">Checks your backups</text>
+    <text class="p" x="18" y="112">3 copies, 2 kinds of storage,</text>
+    <text class="p" x="18" y="132">1 away from home – and</text>
+    <text class="p" x="18" y="152">what it costs per year.</text>
+  </g>
+  <g transform="translate(677 210)">
+    <rect width="203" height="174" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text class="i" x="18" y="48">🙈</text>
+    <text class="h" x="18" y="88">Private stays private</text>
+    <text class="p" x="18" y="112">Folders you exclude are</text>
+    <text class="p" x="18" y="132">invisible to the AI –</text>
+    <text class="p" x="18" y="152">not even their names.</text>
+  </g>
+</svg>

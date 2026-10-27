@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Asking an AI alone to tidy up: folders by file type, cryptic names and duplicates stay, a game folder is moved and breaks, no undo. AI with aichivist: folders by topic, names read from the document, duplicates to the trash after your OK, the game is left alone, every step can be undone.">
+  <style>
+    .t{font:600 19px -apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#24292f}
+    .p{font:italic 14px -apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#24292f}
+    .f{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#57606a}
+    .g{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#1a7f37}
+    .d{font:600 14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#24292f}
+    .r{font:13px -apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#cf222e}
+    .k{font:13px -apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#1a7f37}
+  </style>
+  <rect width="900" height="520" rx="16" fill="#ffffff"/>
+
+  <rect x="20" y="20" width="420" height="480" rx="14" fill="#fff8f5" stroke="#ffd8c8"/>
+  <text class="t" x="44" y="58">Just asking an AI</text>
+  <rect x="44" y="74" width="190" height="30" rx="15" fill="#ffffff" stroke="#ffd8c8"/>
+  <text class="p" x="60" y="94">"Tidy up my documents."</text>
+  <text class="d" x="44" y="138">📁 PDFs   📁 Images   📁 Misc</text>
+  <text class="d" x="44" y="162">📁 Documents   📁 New folder (2)</text>
+  <text class="f" x="68" y="190">scan_0042.pdf</text>
+  <text class="f" x="68" y="214">invoice (1).pdf</text>
+  <text class="f" x="68" y="238">invoice (2).pdf</text>
+  <text class="d" x="44" y="270">📁 Misc/Example Game</text>
+  <text class="r" x="68" y="292">moved along – the game no longer starts</text>
+  <text class="r" x="44" y="340">✗  folders by file type, not by topic</text>
+  <text class="r" x="44" y="366">✗  cryptic names stay cryptic</text>
+  <text class="r" x="44" y="392">✗  duplicates stay</text>
+  <text class="r" x="44" y="418">✗  programs that need their files break</text>
+  <text class="r" x="44" y="444">✗  done at once – no plan, no record, no undo</text>
+  <text class="r" x="44" y="470">✗  next time: a different system</text>
+
+  <rect x="460" y="20" width="420" height="480" rx="14" fill="#f3fbf5" stroke="#bfe8c9"/>
+  <text class="t" x="484" y="58">AI with aichivist</text>
+  <rect x="484" y="74" width="190" height="30" rx="15" fill="#ffffff" stroke="#bfe8c9"/>
+  <text class="p" x="500" y="94">"Tidy up my documents."</text>
+  <text class="d" x="484" y="138">📁 Insurance</text>
+  <text class="g" x="508" y="160">2026-01-01 Health insurance policy.pdf</text>
+  <text class="d" x="484" y="190">📁 Phone &amp; internet</text>
+  <text class="g" x="508" y="212">2026-03-02 Mobile invoice February.pdf</text>
+  <text class="d" x="484" y="242">🗑 invoice (2).pdf</text>
+  <text class="k" x="508" y="262">same content – to the trash after your OK</text>
+  <text class="d" x="484" y="292">🎮 Example Game – left where it is</text>
+  <text class="k" x="484" y="340">✓  folders by topic, from your own rules</text>
+  <text class="k" x="484" y="366">✓  names read from the document itself</text>
+  <text class="k" x="484" y="392">✓  duplicates found by content, not by name</text>
+  <text class="k" x="484" y="418">✓  program files recognised and left alone</text>
+  <text class="k" x="484" y="444">✓  plan first, your OK, every step undoable</text>
+  <text class="k" x="484" y="470">✓  same rules every time, a catalog to search</text>
+</svg>
