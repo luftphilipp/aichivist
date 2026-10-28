@@ -33,6 +33,8 @@ aichivist gives your AI what a professional archivist works with: **your own fil
 
 ## How it works
 
+![Demo: "Tidy up my Downloads" – the AI proposes a plan, you approve, the files are filed and the duplicate goes to the trash](docs/demo-tidy-up.gif)
+
 ![The AI reads, proposes a plan, you approve, everything is filed](docs/how-it-works.svg)
 
 - **Nothing happens without your OK.** You see the plan first and can change or strike any line.
