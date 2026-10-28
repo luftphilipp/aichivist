@@ -59,5 +59,14 @@ class PluginManifestTest(unittest.TestCase):
         self.assertEqual([p for p in PLUGIN.rglob("*") if p.name in SYSTEM_FILES], [])
 
 
+class OtherAgentsTest(unittest.TestCase):
+    def test_gemini_extension_pins_this_release_and_loads_the_agent_guide(self):
+        ext = json.loads((ROOT / "gemini-extension.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(ext["version"], aichivist.__version__)
+        self.assertIn(f"aichivist[mcp]=={aichivist.__version__}", ext["mcpServers"]["aichivist"]["args"])
+        self.assertTrue((ROOT / ext["contextFileName"]).is_file())
+
+
 if __name__ == "__main__":
     unittest.main()

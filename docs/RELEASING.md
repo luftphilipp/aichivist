@@ -30,7 +30,10 @@ Publishing creates the tag `v0.1.0`; `release.yml` then uploads the package to P
 
 ## Later releases
 
-1. Raise the version in `aichivist/__init__.py`, `pyproject.toml` and `extension/manifest.json` (the extension build
-   refuses mismatching versions).
+1. Raise the version in `aichivist/__init__.py`, `pyproject.toml`, `extension/manifest.json`,
+   `plugin/.claude-plugin/plugin.json` (also the pinned `aichivist[mcp]==…` in its `mcpServers`) and
+   `gemini-extension.json` – the tests refuse mismatching versions.
 2. Move the "unreleased" changelog entries under the new version.
-3. Draft a release with the tag `vX.Y.Z` and publish it.
+3. Publish a release with the tag `vX.Y.Z`. `release.yml` then uploads to PyPI, attaches `aichivist-X.Y.Z.mcpb` and
+   `aichivist.mcpb` (the README's download button), and updates the MCP Registry entry (`server.json`) by itself.
+   Glama rebuilds automatically (auto-release); Anthropic's directory follows the `main` branch.

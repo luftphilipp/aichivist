@@ -7,12 +7,12 @@
     "url": "https://github.com/luftphilipp/aichivist",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/luftphilipp/aichivist/releases/download/v0.1.0/aichivist-0.1.0.mcpb",
-      "fileSha256": "d16bc32a2a46d776811102820bcddba181d552a1b46add6537a3f1d569ec6ceb",
+      "identifier": "https://github.com/luftphilipp/aichivist/releases/download/v0.1.1/aichivist-0.1.1.mcpb",
+      "fileSha256": "308a79ff5f946696de4325c631103fb89365652a06626a95149ac1ef001684fe",
       "transport": {
         "type": "stdio"
       }

@@ -67,6 +67,22 @@ aichivist."* The setup installs the command-line tool if it is missing (it asks 
 **Codex, Gemini CLI, Cursor** – `pipx install aichivist` (or `uv tool install aichivist`), then copy
 [`templates/AGENTS.md`](templates/AGENTS.md) to where your agent reads instructions.
 
+**Other AI apps** – aichivist's MCP server runs locally with [uv](https://docs.astral.sh/uv/) installed:
+- **Cursor:** [one-click install](https://cursor.com/en/install-mcp?name=aichivist&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyItLWZyb20iLCJhaWNoaXZpc3RbbWNwXSIsImFpY2hpdmlzdCIsIm1jcCIsIi0tcm9vdCIsIiR7d29ya3NwYWNlRm9sZGVyfSJdfQ==) (organizes the open
+  project folder).
+- **VS Code / GitHub Copilot:** [one-click install](https://vscode.dev/redirect/mcp/install?name=aichivist&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22aichivist%5Bmcp%5D%22%2C%22aichivist%22%2C%22mcp%22%2C%22--root%22%2C%22%24%7BworkspaceFolder%7D%22%5D%7D)
+  (organizes the open folder).
+- **Codex** (OpenAI) – add to `~/.codex/config.toml`, with the folders it may organize:
+  ```toml
+  [mcp_servers.aichivist]
+  command = "uvx"
+  args = ["--from", "aichivist[mcp]", "aichivist", "mcp", "--root", "~/Downloads", "--root", "~/Documents"]
+  ```
+- **Antigravity CLI** (Google) – the same server in `~/.gemini/config/mcp_config.json` under `mcpServers`;
+  **Gemini CLI** (paid plans): `gemini extensions install https://github.com/luftphilipp/aichivist`.
+- **ChatGPT** connects only to servers on the internet, not to local ones – aichivist keeps your files on your
+  computer, so it does not offer that. Use Codex instead.
+
 **Downloaded the ZIP?** Unpack it and double-click **`Start (Mac).command`** or **`Start (Windows).bat`**
 (Linux: `start.sh`). A simple menu opens – look at your Downloads, check your backups, and see which AI app on your
 computer can tidy up. No installation needed, only Python 3 (a new Mac offers to install it by itself).

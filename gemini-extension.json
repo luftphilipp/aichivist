@@ -1,0 +1,12 @@
+{
+  "name": "aichivist",
+  "version": "0.1.1",
+  "description": "Clean up your files like an archivist: filing plans you approve, names from the document, duplicates by content, undo for every step.",
+  "mcpServers": {
+    "aichivist": {
+      "command": "uvx",
+      "args": ["--from", "aichivist[mcp]==0.1.1", "aichivist", "mcp", "--root", "${workspacePath}"]
+    }
+  },
+  "contextFileName": "templates/AGENTS.md"
+}

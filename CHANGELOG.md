@@ -2,6 +2,13 @@
 
 All notable changes are listed here. Format: [Keep a Changelog](https://keepachangelog.com/), versions: [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- Setup for other AI apps in the README: one-click installs for Cursor and VS Code / GitHub Copilot, Codex and
+  Antigravity CLI configuration, and `gemini-extension.json` for Gemini CLI.
+- Releases update the MCP Registry entry automatically (GitHub OIDC, no stored secret).
+
 ## [0.1.1] – 2026-10-28
 
 ### Changed (fewer tokens)
