@@ -125,8 +125,8 @@ def _catalogs(sub) -> None:
     s.add_argument("--add-missing", action="store_true", help="append rows for uncatalogued files to describe")
     s.add_argument("--prefill", action="store_true", help="with --add-missing: prefill rows from the document text (◇)")
 
-    sub.add_parser("suggest", help="read a document and suggest date, issuer, kind, keywords and a name").add_argument(
-        "file")
+    sub.add_parser("suggest", help="read documents and suggest date, issuer, kind and a name; a folder or several "
+                                   "files give one line each").add_argument("files", nargs="+")
     sub.add_parser("style", help="naming examples of an area (past renames, names per folder)").add_argument("area")
 
     s = sub.add_parser("due", help="records whose retention period is over – propose archive or deletion")

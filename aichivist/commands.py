@@ -227,8 +227,13 @@ def cmd_similar(a) -> Out:
 
 
 def cmd_suggest(a) -> Out:
-    s = describe.suggest(fileops.full_path(a.file))
-    return Out(0, s, [f"{k}: {', '.join(v) if isinstance(v, list) else v}" for k, v in s.items()])
+    paths = [fileops.full_path(f) for f in a.files]
+    if len(paths) == 1 and paths[0].is_file():
+        s = describe.suggest(paths[0])
+        return Out(0, s, [f"{k}: {', '.join(v) if isinstance(v, list) else v}" for k, v in s.items()])
+    rows = describe.rows(describe.visible_files(paths))
+    return Out(0, rows, [f"{r['file']}\t->\t{r['suggested_name']}" + ("" if r["confident"] else "\t(?)")
+                         for r in rows])
 
 
 def cmd_style(a) -> Out:

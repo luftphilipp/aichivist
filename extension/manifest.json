@@ -2,7 +2,7 @@
   "manifest_version": "0.4",
   "name": "aichivist",
   "display_name": "aichivist – archival filing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Clean up your files like an archivist – Claude renames, sorts and de-duplicates, you approve every step.",
   "long_description": "Claude reads your documents, proposes a filing plan you approve, keeps catalogs, logs every step and can undo it. Closed collections are sealed with SHA-256 checksums and exportable as BagIt packages. Program data such as game folders or photo libraries is left alone, and it checks whether your backups follow the 3-2-1 rule. Claude only sees the folders you choose; excluded folders stay invisible.",
   "author": {
@@ -20,9 +20,18 @@
     "entry_point": "src/server.py",
     "mcp_config": {
       "command": "uv",
-      "args": ["run", "--directory", "${__dirname}", "src/server.py",
-               "--roots", "${user_config.folders}", "--exclude", "${user_config.excluded}",
-               "--rules", "${user_config.rules}"]
+      "args": [
+        "run",
+        "--directory",
+        "${__dirname}",
+        "src/server.py",
+        "--roots",
+        "${user_config.folders}",
+        "--exclude",
+        "${user_config.excluded}",
+        "--rules",
+        "${user_config.rules}"
+      ]
     }
   },
   "user_config": {
@@ -32,7 +41,10 @@
       "description": "Claude can only see and file documents inside these folders.",
       "multiple": true,
       "required": true,
-      "default": ["${HOME}/Downloads", "${DOCUMENTS}"]
+      "default": [
+        "${HOME}/Downloads",
+        "${DOCUMENTS}"
+      ]
     },
     "excluded": {
       "type": "directory",
@@ -52,17 +64,33 @@
     {
       "name": "tidy_up",
       "description": "File the documents in a folder with a plan you approve",
-      "arguments": ["folder"],
+      "arguments": [
+        "folder"
+      ],
       "text": "Please tidy up ${arguments.folder} with aichivist: read the rules, propose a filing plan, and wait for my approval before applying it."
     }
   ],
   "tools_generated": true,
   "compatibility": {
-    "platforms": ["darwin", "linux", "win32"],
+    "platforms": [
+      "darwin",
+      "linux",
+      "win32"
+    ],
     "runtimes": {
       "python": ">=3.10"
     }
   },
-  "keywords": ["files", "archive", "documents", "organize", "filing", "records"],
-  "license": "MIT"
+  "keywords": [
+    "files",
+    "archive",
+    "documents",
+    "organize",
+    "filing",
+    "records"
+  ],
+  "license": "MIT",
+  "privacy_policies": [
+    "https://github.com/luftphilipp/aichivist/blob/main/PRIVACY.md"
+  ]
 }

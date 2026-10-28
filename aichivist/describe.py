@@ -159,3 +159,22 @@ def suggest(path: Path, text: Optional[str] = None) -> Dict[str, Any]:
     name = " ".join(parts) + path.suffix.lower() if parts and confident else path.name
     return {"date": date, "issuer": issuer, "kind": kind, "summary": summary(text), "keywords": words,
             "suggested_name": name, "confident": confident, "has_text": bool(text.strip())}
+
+
+def rows(files) -> List[Dict[str, Any]]:
+    """One compact suggestion per file: enough to file most documents without reading them in full."""
+    found = []
+    for file in files:
+        s = suggest(file)
+        found.append({"file": file.name, "folder": str(file.parent), "date": s["date"], "issuer": s["issuer"],
+                      "kind": s["kind"], "suggested_name": s["suggested_name"], "confident": s["confident"]})
+    return found
+
+
+def visible_files(paths) -> List[Path]:
+    """The given files, plus the visible files directly inside the given folders."""
+    found: List[Path] = []
+    for path in paths:
+        entries = sorted(path.iterdir()) if path.is_dir() else [path]
+        found += [e for e in entries if e.is_file() and not e.name.startswith(".")]
+    return found

@@ -23,8 +23,8 @@ AI_LINKS = "https://github.com/luftphilipp/aichivist#get-started"
 AI_STEPS: Dict[str, str] = {
     "Claude Desktop": "Claude Desktop: download aichivist-<version>.mcpb from the releases page, double-click it, "
                       "choose the folders Claude may organize, then ask: \"Tidy up my Downloads.\"",
-    "Claude Code": "Claude Code: type /plugin marketplace add luftphilipp/aichivist, then /plugin install "
-                   "aichivist@aichivist, then say: \"Set up aichivist.\"",
+    "Claude Code": "Claude Code: type /plugin install aichivist --marketplace luftphilipp/aichivist, then say: "
+                   "\"Set up aichivist.\"",
     "Codex": "Codex, Gemini CLI, Cursor: copy templates/AGENTS.md from this folder to where your AI reads its "
              "instructions.",
 }

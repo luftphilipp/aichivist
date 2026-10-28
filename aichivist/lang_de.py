@@ -276,10 +276,9 @@ GERMAN = {
     "Claude may organize, then ask: \"Tidy up my Downloads.\"":
         "Claude Desktop: aichivist-<Version>.mcpb von der Release-Seite herunterladen, doppelklicken, die Ordner "
         "wählen, die Claude ordnen darf, dann fragen: „Räum meine Downloads auf.“",
-    "Claude Code: type /plugin marketplace add luftphilipp/aichivist, then /plugin install aichivist@aichivist, then "
-    "say: \"Set up aichivist.\"":
-        "Claude Code: /plugin marketplace add luftphilipp/aichivist eingeben, dann "
-        "/plugin install aichivist@aichivist, dann sagen: „Richte aichivist ein.“",
+    "Claude Code: type /plugin install aichivist --marketplace luftphilipp/aichivist, then say: \"Set up aichivist.\"":
+        "Claude Code: /plugin install aichivist --marketplace luftphilipp/aichivist eingeben, dann sagen: "
+        "„Richte aichivist ein.“",
     "Codex, Gemini CLI, Cursor: copy templates/AGENTS.md from this folder to where your AI reads its instructions.":
         "Codex, Gemini CLI, Cursor: templates/AGENTS.md aus diesem Ordner dorthin kopieren, wo deine KI ihre "
         "Anweisungen liest.",

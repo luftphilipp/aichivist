@@ -12,6 +12,8 @@
 ![Windows · macOS · Linux](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-lightgrey)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
+<a href="https://github.com/luftphilipp/aichivist/releases/latest/download/aichivist.mcpb"><img alt="Download for Claude Desktop" src="https://img.shields.io/badge/Download-for%20Claude%20Desktop-d97757?style=for-the-badge"></a>
+
 [Get started](#get-started) · [Why not just ask an AI?](#why-not-just-ask-an-ai) · [What it can do](#what-it-can-do)
 
 </div>
@@ -45,17 +47,22 @@ aichivist gives your AI what a professional archivist works with: **your own fil
 
 ## Get started
 
+<p align="center">
+  <a href="https://github.com/luftphilipp/aichivist/releases/latest/download/aichivist.mcpb"><img alt="Download for Claude Desktop" src="https://img.shields.io/badge/Download-for%20Claude%20Desktop-d97757?style=for-the-badge"></a>
+  &nbsp;
+  <a href="https://github.com/luftphilipp/aichivist/archive/refs/heads/main.zip"><img alt="Download ZIP (without AI)" src="https://img.shields.io/badge/Download-ZIP%20without%20AI-555555?style=for-the-badge"></a>
+</p>
+
 **Claude Desktop** – the easiest way, no technical knowledge needed
-1. Download the `.mcpb` file from the [latest release](https://github.com/luftphilipp/aichivist/releases/latest)
-   (no Claude Desktop yet? [claude.ai/download](https://claude.ai/download)).
-2. Double-click it and choose the folders Claude may organize.
+1. Click **Download for Claude Desktop** above (no Claude Desktop yet? [claude.ai/download](https://claude.ai/download)).
+2. Double-click the downloaded file and choose the folders Claude may organize.
 3. Ask Claude: *"Tidy up my Downloads."*
 
 <details>
 <summary>Other ways: Claude Code, Codex/Gemini CLI/Cursor, or without AI</summary>
 
-**Claude Code** – type `/plugin marketplace add luftphilipp/aichivist`, then `/plugin install aichivist@aichivist`,
-then say *"Set up aichivist."* The setup installs the command-line tool if it is missing (it asks first).
+**Claude Code** – type `/plugin install aichivist --marketplace luftphilipp/aichivist`, then say *"Set up
+aichivist."* The setup installs the command-line tool if it is missing (it asks first).
 
 **Codex, Gemini CLI, Cursor** – `pipx install aichivist` (or `uv tool install aichivist`), then copy
 [`templates/AGENTS.md`](templates/AGENTS.md) to where your agent reads instructions.
@@ -103,10 +110,11 @@ Archives have organized documents reliably for centuries. aichivist brings their
 | Records are **kept for a set time**, then archived or destroyed | Old records come up when their time is over – you choose |
 | **Copies are kept in separate places** | It checks the 3-2-1 rule: 3 copies, 2 kinds of storage, 1 away from home |
 
-## Privacy
+## Privacy Policy
 
-aichivist itself works only on your computer. The AI that reads your documents (e.g. Claude) receives the content of
-the documents it reads – so you decide which folders it may open, and can exclude private ones completely.
+aichivist itself works only on your computer: no account, no server, no telemetry. The AI that reads your documents
+(e.g. Claude) receives the content of the documents it reads – so you decide which folders it may open, and can
+exclude private ones completely. Full text: [PRIVACY.md](PRIVACY.md).
 
 ## How this was built
 

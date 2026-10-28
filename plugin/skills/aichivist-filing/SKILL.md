@@ -16,10 +16,11 @@ Everything below follows those rules; if they conflict, the rules win. Ask **one
   change (never apply it without approval).
 
 ## 2. Read and decide (nothing moves yet)
-For each file to be filed: `aichivist --json suggest <file>` reads it (scans via built-in OCR) and proposes date,
-issuer, kind and a name; compare with `aichivist --json style <area>` so the name matches the person's style, and
-decide the target strictly by the rules. `"confident": false` means too little was recognised – read the document
-yourself or keep the name. Unclear → leave it and collect a question.
+One call for the whole inbox: `aichivist --json suggest <inbox>` reads every file (scans via built-in OCR) and gives
+one row each with date, issuer, kind and a name. Compare with `aichivist --json style <area>` so names match the
+person's style, and decide the target strictly by the rules. Only for rows with `"confident": false` read more –
+`aichivist --json suggest <file>` for one file, or open the first page yourself; never read whole documents just to
+file them (it costs many tokens). Unclear → leave it and collect a question.
 - `aichivist --json similar <inbox> --in <area>` → the same document as a new scan: ask whether it replaces the old
   one (`v2`) or goes to TRASH.
 - `aichivist --json duplicates <inbox> --in <target area>` → identical files become `TRASH` rows with the reason

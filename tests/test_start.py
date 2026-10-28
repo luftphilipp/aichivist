@@ -44,7 +44,7 @@ class StartMenuTest(SandboxTest):
         with mock.patch.object(start, "installed_ai", return_value=["Claude Code"]):
             _, text, _ = self.run_menu("6", "0")
 
-        self.assertIn("/plugin marketplace add", text)
+        self.assertIn("/plugin install aichivist --marketplace", text)
         self.assertNotIn(".mcpb", text)
 
     def test_without_an_ai_app_claude_desktop_is_recommended_with_its_download(self):

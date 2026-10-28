@@ -30,8 +30,9 @@ from .config import full_path
 from .fileops import FilingError
 
 PLAN_NAME = re.compile(r"^[\w .-]{1,60}$")
-DEFAULT_MAX_CHARS = 20_000
-LIST_LIMIT = 300
+DEFAULT_MAX_CHARS = 2_500  # the first page names issuer, date and kind; read on with offset only when unclear
+LIST_LIMIT = 100
+SUGGEST_LIMIT = 50  # files per suggest_names call
 
 
 class Workspace:
@@ -74,15 +75,22 @@ class Workspace:
         entries = [{"name": p.name, "kind": "folder" if p.is_dir() else "file",
                     "size": p.stat().st_size if p.is_file() else None}
                    for p in sorted(folder.iterdir()) if not p.name.startswith(".") and not self.excluded(p.resolve())]
-        return {"path": str(folder), "entries": entries[:LIST_LIMIT], "truncated": len(entries) > LIST_LIMIT}
+        return {"path": str(folder), "entries": entries[:LIST_LIMIT], "total": len(entries),
+                "truncated": len(entries) > LIST_LIMIT}
 
-    def read_document(self, path: str, max_chars: int = DEFAULT_MAX_CHARS) -> Dict[str, Any]:
+    def read_document(self, path: str, max_chars: int = DEFAULT_MAX_CHARS, offset: int = 0) -> Dict[str, Any]:
         file = self.check(path)
         if not file.is_file():
             raise FilingError(f"not a file: {path}")
         text, method = fulltext.extract(file)
-        return {"path": str(file), "method": method, "text": text[:max_chars], "characters": len(text),
-                "truncated": len(text) > max_chars}
+        end = offset + max_chars
+        return {"path": str(file), "method": method, "text": text[offset:end], "characters": len(text),
+                "truncated": len(text) > end, "next_offset": end if len(text) > end else None}
+
+    def suggest_names(self, paths: List[str]) -> List[Dict[str, Any]]:
+        """One compact row per file – read a document in full only where this is not confident."""
+        files = [f for f in describe.visible_files([self.check(p) for p in paths]) if not self.excluded(f.resolve())]
+        return describe.rows(files[:SUGGEST_LIMIT])
 
     def inventory(self, path: str) -> Dict[str, Any]:
         folder = self.check(path)

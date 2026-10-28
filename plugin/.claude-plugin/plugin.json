@@ -1,8 +1,61 @@
 {
   "name": "aichivist",
-  "description": "Archival-grade filing for Claude Code: guided setup, filing plans with human approval, catalogs, open/closed collections, and a guard hook for protected areas. Requires the aichivist CLI (pip install aichivist).",
-  "version": "0.1.0",
+  "displayName": "aichivist",
+  "version": "0.1.1",
+  "description": "Clean up your files like an archivist: Claude reads your documents, proposes a filing plan you approve, renames by content, finds duplicates, leaves program data alone and logs every step with undo.",
   "author": {
-    "name": "Philipp Luft"
+    "name": "Philipp Luft",
+    "url": "https://github.com/luftphilipp"
+  },
+  "homepage": "https://github.com/luftphilipp/aichivist",
+  "repository": "https://github.com/luftphilipp/aichivist",
+  "license": "MIT",
+  "keywords": [
+    "files",
+    "documents",
+    "filing",
+    "archive",
+    "organize",
+    "duplicates",
+    "records-management"
+  ],
+  "icon": "./icon.png",
+  "documentationUrl": "https://github.com/luftphilipp/aichivist#readme",
+  "supportUrl": "https://github.com/luftphilipp/aichivist/issues",
+  "privacyPolicyUrl": "https://github.com/luftphilipp/aichivist/blob/main/PRIVACY.md",
+  "userConfig": {
+    "folder": {
+      "type": "directory",
+      "title": "Folder to organize",
+      "description": "Claude can only see and file documents inside this folder, e.g. your home or Documents folder.",
+      "required": true
+    },
+    "excluded": {
+      "type": "directory",
+      "title": "Private folder (optional)",
+      "description": "A folder inside the one above that Claude must never see, e.g. health records."
+    },
+    "rules": {
+      "type": "file",
+      "title": "Filing rules (optional)",
+      "description": "Your rules file (see templates/RULES.md). Without it, Claude asks where things belong."
+    }
+  },
+  "mcpServers": {
+    "aichivist": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "aichivist[mcp]==0.1.1",
+        "aichivist",
+        "mcp",
+        "--root",
+        "${user_config.folder}",
+        "--exclude",
+        "${user_config.excluded}",
+        "--rules",
+        "${user_config.rules}"
+      ]
+    }
   }
 }

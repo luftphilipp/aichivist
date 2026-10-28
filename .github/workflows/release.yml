@@ -29,6 +29,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: python extension/build.py dist
       - name: attach the Claude Desktop extension to the release
-        run: gh release upload "${GITHUB_REF_NAME}" dist/*.mcpb --clobber
+        # aichivist.mcpb (no version in the name) keeps the README's download button pointing at the newest release
+        run: |
+          cp dist/*.mcpb dist/aichivist.mcpb
+          gh release upload "${GITHUB_REF_NAME}" dist/*.mcpb --clobber
         env:
           GH_TOKEN: ${{ github.token }}

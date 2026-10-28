@@ -2,7 +2,27 @@
 
 All notable changes are listed here. Format: [Keep a Changelog](https://keepachangelog.com/), versions: [SemVer](https://semver.org/).
 
-## [0.1.0] – unreleased
+## [0.1.1] – 2026-10-28
+
+### Changed (fewer tokens)
+- `read_document` returns the first page (2,500 characters) by default; `next_offset` reads on only when needed.
+- New `suggest_names` (MCP) and `aichivist suggest <folder>` (CLI): date, issuer, kind and a name for every file of a
+  folder in one call; the filing skill and the agent template start there.
+- Tool definitions about a third smaller: shorter descriptions, no output schemas, and results are sent once instead
+  of twice (no duplicate structured content). Folder listings stop at 100 entries and give the total.
+
+### Added
+- Claude plugin ready for Anthropic's directory: it brings the MCP server (`uvx`, pinned release), asks for the folder
+  to organize, an optional private folder and the rules file; plugin README, icon and listing links.
+- Privacy policy (`PRIVACY.md`), linked from the README, the plugin and the Claude Desktop extension.
+- Download buttons in the README; every release also carries `aichivist.mcpb` without a version in its name.
+- Every MCP tool has a title, and the server reports its version.
+
+### Fixed
+- Empty plugin or extension settings no longer reach the server as empty paths.
+- The guard hook runs as a script inside the plugin (`hooks/guard.sh`).
+
+## [0.1.0] – 2026-10-27
 
 ### Fixed (from a field report)
 - Moving onto drives without file flags (exFAT) no longer stops with "Invalid argument": content and dates are kept,

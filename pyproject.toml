@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aichivist"
-version = "0.1.0"
+version = "0.1.1"
 description = "Clean up your files like an archivist: AI agents rename, sort and de-duplicate documents with plans you approve and full undo"
 readme = "README.md"
 requires-python = ">=3.9"

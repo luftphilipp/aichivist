@@ -14,6 +14,7 @@ answers in total; ask a further question only when the folders do not answer it.
 Run `aichivist --version`. If it is missing, ask once: "May I install aichivist (a small, free program)?" Then use the
 first that exists: `uv tool install aichivist`, `pipx install aichivist`, `python3 -m pip install --user aichivist`.
 If the package is not found, install from GitHub instead (`… git+https://github.com/luftphilipp/aichivist`).
+The plugin's MCP server starts with `uvx`; if `uv` is missing, offer to install it as well (https://docs.astral.sh/uv/).
 
 ## 2. Look (read only, no questions)
 Find the usual places yourself: Downloads, Desktop, Documents, synced cloud folders (macOS

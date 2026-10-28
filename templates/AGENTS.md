@@ -22,7 +22,8 @@ Ask the person **one question at a time**.
 ## Tidy up ("tidy up", "file my downloads", "räum auf" …)
 1. `aichivist --json inventory <inbox>` – every file in an inbox is to be filed (`entries`). For areas the person
    maintains, moves marked `by_hand` are corrections: propose a matching rule change afterwards.
-2. For each file: `aichivist --json suggest <file>` (reads it, scans included) and `aichivist --json style <area>`
+2. One call for the inbox: `aichivist --json suggest <inbox>` (one row per file, scans included; read more only where
+   `confident` is false) and `aichivist --json style <area>`
    so the new name matches the existing ones. Decide the target by the rules; collect questions for unclear files.
 3. `aichivist --json duplicates <inbox> --in <area>` and `aichivist --json similar <inbox> --in <area>` –
    identical files become `TRASH` rows; for the same document as a new scan, ask.
