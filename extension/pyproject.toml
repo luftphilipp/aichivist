@@ -3,4 +3,10 @@ name = "aichivist-extension"
 version = "0.1.0"
 description = "Claude Desktop extension for aichivist"
 requires-python = ">=3.10"
-dependencies = ["mcp>=1.10", "pypdf>=4"]
+# cryptography (pulled in by mcp) ships Windows ARM64 wheels only for 46.0.0–46.0.3, newer ones would be compiled
+# from source and fail without Rust and MSVC build tools
+dependencies = [
+    "mcp>=1.10",
+    "pypdf>=4",
+    "cryptography==46.0.3; sys_platform == 'win32' and platform_machine == 'ARM64'",
+]
