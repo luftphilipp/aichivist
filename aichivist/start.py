@@ -21,8 +21,10 @@ ROOT = Path(__file__).resolve().parent.parent
 AI_LINKS = "https://github.com/luftphilipp/aichivist#get-started"
 # one way per AI app – the menu shows only the ways for apps installed on this computer
 AI_STEPS: Dict[str, str] = {
-    "Claude Desktop": "Claude Desktop: download aichivist-<version>.mcpb from the releases page, double-click it, "
-                      "choose the folders Claude may organize, then ask: \"Tidy up my Downloads.\"",
+    "Claude Desktop": "Claude Desktop: download aichivist-<version>.mcpb from the releases page, double-click it "
+                      "(if Windows asks which app to use: Claude Desktop → Settings → Extensions → Advanced settings "
+                      "→ Install Extension…), choose the folders Claude may organize, then ask: "
+                      "\"Tidy up my Downloads.\"",
     "Claude Code": "Claude Code: type /plugin install aichivist --marketplace luftphilipp/aichivist, then say: "
                    "\"Set up aichivist.\"",
     "Codex": "Codex, Gemini CLI, Cursor: copy templates/AGENTS.md from this folder to where your AI reads its "

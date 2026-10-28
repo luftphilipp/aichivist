@@ -57,7 +57,8 @@ aichivist gives your AI what a professional archivist works with: **your own fil
 
 **Claude Desktop** – the easiest way, no technical knowledge needed
 1. Click **Download for Claude Desktop** above (no Claude Desktop yet? [claude.ai/download](https://claude.ai/download)).
-2. Double-click the downloaded file and choose the folders Claude may organize.
+2. Double-click the downloaded file and choose the folders Claude may organize. If Windows asks which app to use,
+   open Claude Desktop instead: *Settings → Extensions → Advanced settings → Install Extension…* and pick the file.
 3. Ask Claude: *"Tidy up my Downloads."*
 
 <details>

@@ -102,7 +102,9 @@ def cmd_update(a) -> Out:
     code = update.install(found.commit)
     lines = [t_("Updated to {commit} from GitHub.", commit=found.commit[:7]) if code == 0
              else t_("Update failed – the installed version stays.")]
-    lines.append(t_("Claude Desktop extension: double-click the newest .mcpb from the releases page."))
+    lines.append(t_("Claude Desktop extension: double-click the newest .mcpb from the releases page (if Windows asks "
+                    "which app to use: Claude Desktop → Settings → Extensions → Advanced settings → "
+                    "Install Extension…)."))
     return Out(code, found._asdict(), lines)
 
 

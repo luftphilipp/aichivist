@@ -236,8 +236,11 @@ GERMAN = {
     "Newest tested version on GitHub: {commit}": "Neueste geprüfte Version auf GitHub: {commit}",
     "Updated to {commit} from GitHub.": "Aktualisiert auf {commit} von GitHub.",
     "Update failed – the installed version stays.": "Aktualisierung fehlgeschlagen – die installierte Version bleibt.",
-    "Claude Desktop extension: double-click the newest .mcpb from the releases page.":
-        "Claude-Desktop-Erweiterung: die neueste .mcpb von der Release-Seite doppelklicken.",
+    "Claude Desktop extension: double-click the newest .mcpb from the releases page (if Windows asks which app to "
+    "use: Claude Desktop → Settings → Extensions → Advanced settings → Install Extension…).":
+        "Claude-Desktop-Erweiterung: die neueste .mcpb von der Release-Seite doppelklicken (fragt Windows nach einem "
+        "Programm: Claude Desktop → Einstellungen → Erweiterungen → Erweiterte Einstellungen → "
+        "Erweiterung installieren…).",
     # start menu
     "aichivist – your AI tidies up your documents like an archivist.":
         "aichivist – deine KI räumt deine Dokumente auf wie ein Archivar.",
@@ -272,10 +275,13 @@ GERMAN = {
         "Weiter: Wähle 6 – dort steht der schnellste Weg, wie eine KI auf diesem Computer aufräumt.",
     "No AI app found on this computer. The easiest one: Claude Desktop – {link}":
         "Auf diesem Computer ist keine KI-App installiert. Am einfachsten: Claude Desktop – {link}",
-    "Claude Desktop: download aichivist-<version>.mcpb from the releases page, double-click it, choose the folders "
-    "Claude may organize, then ask: \"Tidy up my Downloads.\"":
-        "Claude Desktop: aichivist-<Version>.mcpb von der Release-Seite herunterladen, doppelklicken, die Ordner "
-        "wählen, die Claude ordnen darf, dann fragen: „Räum meine Downloads auf.“",
+    "Claude Desktop: download aichivist-<version>.mcpb from the releases page, double-click it (if Windows asks "
+    "which app to use: Claude Desktop → Settings → Extensions → Advanced settings → Install Extension…), choose "
+    "the folders Claude may organize, then ask: \"Tidy up my Downloads.\"":
+        "Claude Desktop: aichivist-<Version>.mcpb von der Release-Seite herunterladen, doppelklicken (fragt Windows "
+        "nach einem Programm: Claude Desktop → Einstellungen → Erweiterungen → Erweiterte Einstellungen → "
+        "Erweiterung installieren…), die Ordner wählen, die Claude ordnen darf, dann fragen: "
+        "„Räum meine Downloads auf.“",
     "Claude Code: type /plugin install aichivist --marketplace luftphilipp/aichivist, then say: \"Set up aichivist.\"":
         "Claude Code: /plugin install aichivist --marketplace luftphilipp/aichivist eingeben, dann sagen: "
         "„Richte aichivist ein.“",
