@@ -112,10 +112,14 @@ def serve(plan_file, open_browser: bool = True, block: bool = True) -> str:
     url = f"http://127.0.0.1:{server.server_address[1]}/"
     if open_browser:
         webbrowser.open(url)
+    def run() -> None:
+        try:
+            server.serve_forever()
+        finally:
+            server.server_close()  # release the port once the form is submitted
     if block:
-        server.serve_forever()
-        server.server_close()
+        run()
     else:
-        threading.Thread(target=server.serve_forever, daemon=True).start()
+        threading.Thread(target=run, daemon=True).start()
     return url
 

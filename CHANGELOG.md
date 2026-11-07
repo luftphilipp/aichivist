@@ -23,6 +23,8 @@ All notable changes are listed here. Format: [Keep a Changelog](https://keepacha
 ### Fixed
 - Drives answering "Operation not supported" (EOPNOTSUPP) when copying file flags keep content and dates instead of
   stopping the move.
+- The plan review page releases its port after the form is submitted (it stayed open when started in the
+  background).
 
 ## [0.1.1] – 2026-10-28
 

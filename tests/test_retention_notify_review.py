@@ -78,8 +78,10 @@ class ReviewTest(SandboxTest):
     def test_local_page_round_trip(self):
         url = review.serve(self.plan, open_browser=False, block=False)
 
-        page = urllib.request.urlopen(url, timeout=5).read().decode()
-        done = urllib.request.urlopen(url, data=b"row=2", timeout=5).read().decode()
+        with urllib.request.urlopen(url, timeout=5) as response:
+            page = response.read().decode()
+        with urllib.request.urlopen(url, data=b"row=2", timeout=5) as response:
+            done = response.read().decode()
 
         self.assertIn("3 proposals", page)
         self.assertIn("1 rows approved", done)
