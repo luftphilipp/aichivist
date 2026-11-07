@@ -25,6 +25,9 @@ Ask the person **one question at a time**.
 2. One call for the inbox: `aichivist --json suggest <inbox>` (one row per file, scans included; read more only where
    `confident` is false) and `aichivist --json style <area>`
    so the new name matches the existing ones. Decide the target by the rules; collect questions for unclear files.
+   Rows with `temporary` (screenshots without a document) are trash proposals; rows with `sensitive` show a secret –
+   never repeat it, tell the person to save it in a password manager. `downloads` in the inventory are still
+   loading: leave them. For a quick overview first: `aichivist triage <inbox>`.
 3. `aichivist --json duplicates <inbox> --in <area>` and `aichivist --json similar <inbox> --in <area>` –
    identical files become `TRASH` rows; for the same document as a new scan, ask.
 4. `aichivist plan add <plan.md> <file> <target|TRASH> --reason "…"` per file, then `aichivist plan check <plan.md>`.

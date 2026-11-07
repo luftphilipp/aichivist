@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from typing import Dict, Iterator, List, NamedTuple, Tuple
 
-from . import config, journal
+from . import config, inbox, journal
 from .checksums import IGNORED_NAMES, digest
 from .config import full_path
 
@@ -13,6 +13,7 @@ PROJECT_MARKERS = {".git", ".venv", "package.json", "pyproject.toml", "requireme
 DATA_DIR_NAMES = {"Daten", "data", "datasets"}
 BULK_LIMIT = 150  # folders with more files directly inside are treated as one unit (data or image dumps)
 UNIT = "UNIT"     # checksum placeholder for project/data folders
+PARTIAL = "PARTIAL"  # checksum placeholder for unfinished downloads
 
 
 class Changes(NamedTuple):
@@ -34,7 +35,7 @@ def scan(root: Path) -> Iterator[Tuple[str, int, int]]:
     """(relative POSIX path, size, mtime) per file; project and data folders appear once as 'name/'."""
     for dirpath, dirnames, filenames in os.walk(root):
         folder = Path(dirpath)
-        if folder != root and is_unit(folder, dirnames + filenames):
+        if folder != root and (inbox.is_partial(folder) or is_unit(folder, dirnames + filenames)):
             dirnames.clear()
             yield folder.relative_to(root).as_posix() + "/", 0, 0
             continue
@@ -75,6 +76,8 @@ def diff(root, save: bool = False) -> Changes:
         prev = old.get(rel)
         if rel.endswith("/"):
             checksum = UNIT
+        elif inbox.is_partial(Path(rel)):
+            checksum = PARTIAL  # still growing: reading it now is wasted time
         elif prev and prev[0] == size and prev[1] == mtime:
             checksum = prev[2]  # unchanged since last snapshot: reuse checksum
         else:
@@ -93,7 +96,25 @@ def manual_moves(root, changes: Changes) -> List[Tuple[str, str]]:
     return [(old, new) for old, new in changes.moved if str(root / new) not in logged]
 
 
+def downloads(root, changes: Changes) -> List[Dict[str, str]]:
+    """Unfinished downloads in the folder: "downloading", or "stalled" when they stopped growing."""
+    root = full_path(root)
+    return [{"path": rel, "state": inbox.download_state(root / rel.rstrip("/"))}
+            for rel in changes.entries if _partial(rel)]
+
+
+def _partial(rel: str) -> bool:
+    return inbox.is_partial(Path(rel.rstrip("/")))
+
+
 def compare(old, current, first_run: bool) -> Changes:
+    """Unfinished downloads are listed in `entries` only – see `downloads()`."""
+    old = {r: v for r, v in old.items() if not _partial(r)}
+    finished = {r: v for r, v in current.items() if not _partial(r)}
+    return _compare(old, finished, first_run, sorted(current))
+
+
+def _compare(old, current, first_run: bool, entries: List[str]) -> Changes:
     gone = {r: v for r, v in old.items() if r not in current}
     added = {r: v for r, v in current.items() if r not in old}
     by_digest = {v[2]: r for r, v in gone.items() if v[2] != UNIT}
@@ -102,7 +123,7 @@ def compare(old, current, first_run: bool) -> Changes:
     moved_from = {old_rel for old_rel, _ in moved}
     return Changes(
         first_run=first_run,
-        entries=sorted(current),
+        entries=entries,
         new=sorted(set(added) - moved_to),
         changed=sorted(r for r in current if r in old and current[r][2] != old[r][2]),
         moved=moved,

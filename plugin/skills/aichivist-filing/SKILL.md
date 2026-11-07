@@ -21,6 +21,9 @@ one row each with date, issuer, kind and a name. Compare with `aichivist --json 
 person's style, and decide the target strictly by the rules. Only for rows with `"confident": false` read more –
 `aichivist --json suggest <file>` for one file, or open the first page yourself; never read whole documents just to
 file them (it costs many tokens). Unclear → leave it and collect a question.
+Rows marked `temporary` (screenshots without a document) are trash proposals; rows marked `sensitive` show a secret
+(token, key, recovery codes): never repeat it, ask the person to save it in a password manager first. Unfinished
+downloads (`downloads` in the inventory) stay untouched.
 - `aichivist --json similar <inbox> --in <area>` → the same document as a new scan: ask whether it replaces the old
   one (`v2`) or goes to TRASH.
 - `aichivist --json duplicates <inbox> --in <target area>` → identical files become `TRASH` rows with the reason

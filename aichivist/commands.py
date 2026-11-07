@@ -1,4 +1,5 @@
 """Command handlers. Each returns Out(code, data, lines): `data` for --json (agents), `lines` for people."""
+from pathlib import Path
 from typing import Any, Callable, Dict, List, NamedTuple
 
 from . import (
@@ -26,6 +27,7 @@ from . import (
     structure,
     style,
     survey,
+    triage,
     undo,
     update,
 )
@@ -56,9 +58,12 @@ def cmd_inventory(a) -> Out:
     lines += [t_("MOVED") + f"\t{o}\t->\t{n}" for o, n in changes.moved if (o, n) not in by_hand]
     for label, items in (("NEW", changes.new), ("CHANGED", changes.changed), ("REMOVED", changes.removed)):
         lines += [f"{t_(label)}\t{rel}" for rel in items]
+    downloads = inventory.downloads(a.folder, changes)
+    lines += [f"{t_(d['state'].upper())}\t{d['path']}" for d in downloads]
     data = {"first_run": False, "entries": changes.entries,
             "new": changes.new, "changed": changes.changed, "removed": changes.removed,
-            "moved": [{"from": o, "to": n, "by_hand": (o, n) in by_hand} for o, n in changes.moved]}
+            "moved": [{"from": o, "to": n, "by_hand": (o, n) in by_hand} for o, n in changes.moved],
+            "downloads": downloads}
     return Out(0, data, lines or [t_("No changes.")])
 
 
@@ -68,10 +73,33 @@ def cmd_mv(a) -> Out:
     return Out(0, {"from": a.source, "to": str(dst), "link_left": a.leave_link}, [f"{a.source} -> {dst}"] + note)
 
 
+def _size(path: Path) -> int:
+    if path.is_symlink() or not path.exists():
+        return 0
+    if path.is_dir():
+        return sum(p.stat().st_size for p in path.rglob("*") if p.is_file() and not p.is_symlink())
+    return path.stat().st_size
+
+
 def cmd_trash(a) -> Out:
     ctx = None if a.app_data else apps.context()
-    moved = [(p, str(fileops.trash(p, a.allow_closed, a.app_data, ctx))) for p in a.paths]
-    return Out(0, [{"from": p, "to": dst} for p, dst in moved], [t_("trash") + f": {p} -> {dst}" for p, dst in moved])
+    sizes = [_size(fileops.full_path(p)) for p in a.paths]
+    moved = [(p, str(fileops.trash(p, a.allow_closed, a.app_data, ctx, downloading=a.downloading))) for p in a.paths]
+    lines = [t_("trash") + f": {p} -> {dst}" for p, dst in moved]
+    if len(moved) > 1:
+        lines.append(t_("{n} items ({size}) moved to the trash", n=len(moved), size=survey.human(sum(sizes))))
+    return Out(0, [{"from": p, "to": dst} for p, dst in moved], lines)
+
+
+def cmd_triage(a) -> Out:
+    rows = triage.run(a.folder)
+    return Out(0, rows, [_triage_line(r) for r in rows] or [t_("nothing to sort")])
+
+
+def _triage_line(r: Dict[str, Any]) -> str:
+    name = f"\t->\t{r['suggested_name']}" if r.get("suggested_name") else ""
+    secrets = f"\t({', '.join(t_(s) for s in r['secrets'])})" if r.get("secrets") else ""
+    return f"{t_(r['category']).upper()}\t{r['file']}{name}{secrets}\t– {t_(r['hint'])}"
 
 
 def cmd_apps(a) -> Out:

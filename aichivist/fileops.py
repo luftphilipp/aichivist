@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import List, Optional
 from urllib.parse import quote
 
-from . import apps, config, journal
+from . import apps, config, inbox, journal
 from .checksums import same_content
 from .config import full_path  # noqa: F401 (re-exported for commands)
 from .i18n import t
@@ -15,7 +15,7 @@ from .markers import closed_inside, closed_root
 
 WINDOWS_NOT_SAME_DEVICE = 17
 # drives such as exFAT cannot store file flags or permissions; content and dates are what matters
-METADATA_REFUSED = {errno.EINVAL, errno.ENOTSUP, errno.EPERM}
+METADATA_REFUSED = {errno.EINVAL, errno.ENOTSUP, errno.EOPNOTSUPP, errno.EPERM}  # macOS: ENOTSUP ≠ EOPNOTSUPP
 
 
 class FilingError(Exception):
@@ -145,10 +145,13 @@ def move(src, dst, create_folder: bool = False, allow_closed: bool = False, app_
     return dst
 
 
-def trash(src, allow_closed: bool = False, app_data: bool = False, ctx: Optional[apps.Context] = None) -> Path:
+def trash(src, allow_closed: bool = False, app_data: bool = False, ctx: Optional[apps.Context] = None, *,
+          downloading: bool = False) -> Path:
     src = full_path(src)
     if not present(src):
         raise FilingError(t("source missing: {src}", src=src))
+    if not downloading and inbox.still_written(src):
+        raise FilingError(t("{src} is still downloading; cancel the download first, or use --downloading", src=src))
     ensure_open(src, allow_closed, carried=True)
     if not app_data:
         check_programs(src, None, False, ctx)

@@ -27,6 +27,9 @@ def _overview(sub) -> None:
     s.add_argument("--stale-years", type=int, default=3, help="report files unchanged for this many years")
     s.add_argument("--no-duplicates", action="store_true", help="skip the duplicate search (faster)")
 
+    sub.add_parser("triage", help="one look at an inbox: document, temporary screenshot, secret, running download, "
+                                  "installer, film … with what to do (read only)").add_argument("folder")
+
     s = sub.add_parser("inventory", help="new / changed / moved / removed files since the last snapshot")
     s.add_argument("folder")
     s.add_argument("--save", action="store_true", help="store the current state as the new snapshot")
@@ -65,6 +68,7 @@ def _files(sub) -> None:
     s.add_argument("paths", nargs="+")
     s.add_argument("--allow-closed", action="store_true")
     s.add_argument("--app-data", action="store_true", help="delete program data anyway")
+    s.add_argument("--downloading", action="store_true", help="trash an unfinished download that is still running")
 
     s = sub.add_parser("photos", help="photos/videos into <photos>/<year>/[<subject>/] by capture date")
     s.add_argument("inbox")

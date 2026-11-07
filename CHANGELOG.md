@@ -8,6 +8,21 @@ All notable changes are listed here. Format: [Keep a Changelog](https://keepacha
 - Setup for other AI apps in the README: one-click installs for Cursor and VS Code / GitHub Copilot, Codex and
   Antigravity CLI configuration, and `gemini-extension.json` for Gemini CLI.
 - Releases update the MCP Registry entry automatically (GitHub OIDC, no stored secret).
+- `aichivist triage <inbox>`: one read-only look at an inbox – document (with suggested name), temporary screenshot,
+  secret on screen, running or stalled download, installer, archive, film, episode, personal video, photo – each with
+  what to do.
+- Secrets: `suggest` names access tokens, private keys, recovery codes, account keys and card-like numbers in a
+  document (`sensitive`), never the secret itself; summary and keywords are redacted then.
+- Screenshots: recognised by their default name (macOS, Windows, several languages); without a document on them they
+  are marked `temporary`.
+- Unfinished downloads (Safari `.download`, `.crdownload`, `.part` …): `inventory` lists them apart as downloading or
+  stalled and does not checksum them, `suggest` skips them, and `trash` refuses one that is still being written
+  (`--downloading` to override).
+- `trash` with several paths ends with a total (count and size).
+
+### Fixed
+- Drives answering "Operation not supported" (EOPNOTSUPP) when copying file flags keep content and dates instead of
+  stopping the move.
 
 ## [0.1.1] – 2026-10-28
 

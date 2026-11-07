@@ -7,7 +7,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from . import fulltext
+from . import fulltext, inbox, sensitive
 
 DATE_ISO = re.compile(r"\b(20\d{2}|19\d{2})-(\d{2})-(\d{2})\b")
 DATE_DOTTED = re.compile(r"\b(\d{1,2})\.\s?(\d{1,2})\.\s?(20\d{2}|19\d{2})\b")
@@ -142,9 +142,31 @@ def _in_address(word: str, text: str) -> bool:
 
 
 def suggest(path: Path, text: Optional[str] = None) -> Dict[str, Any]:
-    """Prefilled description and a name following `[YYYY-MM-DD ]Issuer Kind Subject.ext`."""
+    """Prefilled description and a name following `[YYYY-MM-DD ]Issuer Kind Subject.ext`.
+
+    `sensitive` names secrets the text shows (never the secret; summary and keywords are redacted then);
+    `temporary` marks a screenshot that shows no document – usually safe to propose for the trash."""
     if text is None:
         text, _ = fulltext.extract(path)
+    secrets = sensitive.find(text)
+    if secrets:
+        text = sensitive.redact(text)
+    shot_date = inbox.screenshot_date(path.name)
+    if shot_date:
+        return _screenshot(path, text, shot_date, secrets)
+    return {**_document(path, text), "sensitive": secrets}
+
+
+def _screenshot(path: Path, text: str, date: str, secrets: List[str]) -> Dict[str, Any]:
+    """Screenshots keep their name; one that shows a document (an invoice, a ticket) is described like one."""
+    doc = _document(path, text)
+    shows_document = bool(doc["issuer"] and doc["kind"])
+    return {**doc, "date": doc["date"] if shows_document else date, "kind": doc["kind"] if shows_document else
+            "Screenshot", "suggested_name": doc["suggested_name"] if shows_document else path.name,
+            "sensitive": secrets, "temporary": not shows_document and not secrets}
+
+
+def _document(path: Path, text: str) -> Dict[str, Any]:
     date, issuer, kind = find_date(text), find_issuer(text), find_kind(text)
     words = keywords(text, n=KEYWORDS * 2)
     issuer_words = set((issuer or "").lower().split())
@@ -166,15 +188,16 @@ def rows(files) -> List[Dict[str, Any]]:
     found = []
     for file in files:
         s = suggest(file)
-        found.append({"file": file.name, "folder": str(file.parent), "date": s["date"], "issuer": s["issuer"],
-                      "kind": s["kind"], "suggested_name": s["suggested_name"], "confident": s["confident"]})
+        row = {"file": file.name, "folder": str(file.parent), "date": s["date"], "issuer": s["issuer"],
+               "kind": s["kind"], "suggested_name": s["suggested_name"], "confident": s["confident"]}
+        found.append({**row, **{k: s[k] for k in ("sensitive", "temporary") if s.get(k)}})  # only when they apply
     return found
 
 
 def visible_files(paths) -> List[Path]:
-    """The given files, plus the visible files directly inside the given folders."""
+    """The given files, plus the visible files directly inside the given folders; unfinished downloads are left out."""
     found: List[Path] = []
     for path in paths:
         entries = sorted(path.iterdir()) if path.is_dir() else [path]
-        found += [e for e in entries if e.is_file() and not e.name.startswith(".")]
+        found += [e for e in entries if e.is_file() and not e.name.startswith(".") and not inbox.is_partial(e)]
     return found

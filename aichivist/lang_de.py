@@ -290,4 +290,43 @@ GERMAN = {
         "Anweisungen liest.",
     "The AI proposes a plan; nothing is moved before you say yes.":
         "Die KI schlägt einen Plan vor; nichts wird verschoben, bevor du Ja sagst.",
+    # inbox: downloads, screenshots, secrets, triage
+    "{src} is still downloading; cancel the download first, or use --downloading":
+        "{src} lädt noch; zuerst den Download abbrechen, oder --downloading verwenden",
+    "{n} items ({size}) moved to the trash": "{n} Einträge ({size}) in den Papierkorb gelegt",
+    "nothing to sort": "nichts einzuordnen",
+    "DOWNLOADING": "LÄDT NOCH",
+    "STALLED": "HÄNGT",
+    "document": "Dokument",
+    "temporary": "vorübergehend",
+    "sensitive": "heikel",
+    "downloading": "lädt noch",
+    "stalled": "hängt",
+    "installer": "Installer",
+    "archive": "Archiv",
+    "film": "Film",
+    "episode": "Serienfolge",
+    "personal video": "eigenes Video",
+    "photo": "Foto",
+    "access token": "Zugriffs-Token",
+    "private key": "privater Schlüssel",
+    "recovery codes": "Wiederherstellungscodes",
+    "account key": "Kontoschlüssel",
+    "password": "Passwort",
+    "card-like number": "kartenähnliche Nummer",
+    "wallet recovery phrase": "Wallet-Wiederherstellungsphrase",
+    "file it (check the suggested name)": "einordnen (Namensvorschlag prüfen)",
+    "screenshot without a document – propose the trash": "Bildschirmfoto ohne Dokument – Papierkorb vorschlagen",
+    "shows a secret – save it in a password manager, then propose the trash":
+        "zeigt ein Geheimnis – im Passwort-Manager sichern, dann Papierkorb vorschlagen",
+    "still downloading – leave it": "lädt noch – liegen lassen",
+    "download stopped – restart or cancel it in the browser": "Download hängt – im Browser neu starten oder abbrechen",
+    "installer – list only; propose the trash once installed":
+        "Installer – nur auflisten; nach der Installation Papierkorb vorschlagen",
+    "archive – list only, contents are not sorted": "Archiv – nur auflisten, der Inhalt wird nicht einsortiert",
+    "film – not a document; file it with your media rules": "Film – kein Dokument; nach deinen Film-Regeln ablegen",
+    "series episode – not a document; file it with your media rules":
+        "Serienfolge – kein Dokument; nach deinen Film-Regeln ablegen",
+    "personal video – use `aichivist photos`": "eigenes Video – mit `aichivist photos` ablegen",
+    "photo – use `aichivist photos`": "Foto – mit `aichivist photos` ablegen",
 }
