@@ -61,6 +61,7 @@ class BatchSuggestCommandTest(SandboxTest):
 
         code, out = run("--json", "suggest", str(self.root / "Downloads"))
 
+        self.assertTrue(out.lstrip().startswith("{"), f"not JSON: {out[:500]!r}")
         rows = json.loads(out)["data"]
         self.assertEqual(code, 0)
         self.assertEqual(sorted(r["file"] for r in rows), ["a.txt", "b.txt"])
