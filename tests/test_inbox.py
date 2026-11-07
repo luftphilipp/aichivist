@@ -9,7 +9,9 @@ from test_commands import run
 from aichivist import describe, fileops, inbox, inventory, sensitive, triage
 from helpers import SandboxTest
 
-JWT = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJleGFtcGxlLW5vdC1hLXJlYWwta2V5Iiwic3ViIjoiYWxleC1zYW1wbGUifQ.ZXhhbXBsZS1zaWduYXR1cmUtb25seQ"  # invented: {"aud":"example-not-a-real-key"}
+# invented token: {"aud":"example-not-a-real-key","sub":"alex-sample"}
+JWT = ("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJleGFtcGxlLW5vdC1hLXJlYWwta2V5Iiwic3ViIjoiYWxleC1zYW1wbGUifQ"
+       ".ZXhhbXBsZS1zaWduYXR1cmUtb25seQ")
 EXDEV = OSError(errno.EXDEV, "cross-device")
 
 
