@@ -39,16 +39,16 @@ class SensitiveTest(SandboxTest):
 
 class ScreenshotSuggestTest(SandboxTest):
     def test_screenshot_without_a_document_is_marked_temporary(self):
-        shot = self.make_file("Downloads/Bildschirmfoto 2026-11-03 um 21.20.15.png", b"png")
+        shot = self.make_file("Downloads/Bildschirmfoto 2026-01-10 um 09.00.00.png", b"png")
 
-        s = describe.suggest(shot, text="Error 1101 Worker threw exception What happened?")
+        s = describe.suggest(shot, text="Page not found – please try again later")
 
         self.assertEqual(s["kind"], "Screenshot")
-        self.assertEqual(s["date"], "2026-11-03")
+        self.assertEqual(s["date"], "2026-01-10")
         self.assertTrue(s["temporary"])
 
     def test_screenshot_of_a_secret_is_flagged_and_its_summary_redacted(self):
-        shot = self.make_file("Downloads/Screenshot 2026-11-03 at 15.47.05.png", b"png")
+        shot = self.make_file("Downloads/Screenshot 2026-01-11 at 10.00.00.png", b"png")
 
         s = describe.suggest(shot, text=f"API token for read access {JWT}")
 
@@ -56,13 +56,13 @@ class ScreenshotSuggestTest(SandboxTest):
         self.assertNotIn(JWT[:20], s["summary"] + " ".join(s["keywords"]))
 
     def test_rows_carry_the_new_marks_only_when_they_apply(self):
-        self.make_file("Downloads/Bildschirmfoto 2026-11-04 um 10.33.59.png", b"png")
+        self.make_file("Downloads/Bildschirmfoto 2026-01-12 um 11.00.00.png", b"png")
         self.make_file("Downloads/invoice.txt", b"Example Shop AG\nInvoice 2026-02-01\nHeadphones")
 
-        with mock.patch("aichivist.fulltext._ocr", return_value=("concurrency limit reached", "ocr")):
+        with mock.patch("aichivist.fulltext._ocr", return_value=("loading, please wait", "ocr")):
             rows = {r["file"]: r for r in describe.rows(describe.visible_files([self.root / "Downloads"]))}
 
-        self.assertTrue(rows["Bildschirmfoto 2026-11-04 um 10.33.59.png"]["temporary"])
+        self.assertTrue(rows["Bildschirmfoto 2026-01-12 um 11.00.00.png"]["temporary"])
         self.assertNotIn("temporary", rows["invoice.txt"])
         self.assertNotIn("sensitive", rows["invoice.txt"])
 
@@ -152,8 +152,8 @@ class DriveFlagsTest(SandboxTest):
 
 class MediaTest(SandboxTest):
     def test_release_names_are_films_or_episodes_and_phone_clips_personal_videos(self):
-        self.assertEqual(inbox.media_kind(self.root / "The.Godfather.1972.2160p.UHD.BluRay.REMUX.mkv"), "film")
-        self.assertEqual(inbox.media_kind(self.root / "Hannibal (2013) - S03E10 - Title [Bluray-1080p].mkv"),
+        self.assertEqual(inbox.media_kind(self.root / "Example.Film.1999.2160p.UHD.BluRay.REMUX.mkv"), "film")
+        self.assertEqual(inbox.media_kind(self.root / "Example Show (2020) - S02E05 - Title [Bluray-1080p].mkv"),
                          "episode")
         self.assertEqual(inbox.media_kind(self.root / "IMG_1234.MOV"), "personal video")
         self.assertIsNone(inbox.media_kind(self.root / "report.pdf"))
@@ -162,20 +162,20 @@ class MediaTest(SandboxTest):
 class TriageTest(SandboxTest):
     def test_one_call_sorts_an_inbox_into_what_to_do(self):
         d = self.root / "Downloads"
-        self.make_file("Downloads/Bildschirmfoto 2026-11-05 um 21.34.44.png", b"png")
-        self.make_file("Downloads/Screenshot 2026-11-03 at 15.47.05.png", b"png")
+        self.make_file("Downloads/Bildschirmfoto 2026-01-13 um 12.00.00.png", b"png")
+        self.make_file("Downloads/Screenshot 2026-01-11 at 10.00.00.png", b"png")
         self.make_file("Downloads/invoice.txt", b"Example Shop AG\nInvoice 2026-02-01\nHeadphones")
         self.make_file("Downloads/Setup.dmg", b"dmg")
         self.make_file("Downloads/Some.Film.2014.1080p.BluRay.x264.mkv", b"mkv")
         self.make_file("Downloads/clip.mp4.crdownload", b"x")
-        texts = {"Bildschirmfoto 2026-11-05 um 21.34.44.png": "Message to the hiring team",
-                 "Screenshot 2026-11-03 at 15.47.05.png": f"API token {JWT}"}
+        texts = {"Bildschirmfoto 2026-01-13 um 12.00.00.png": "Example settings page",
+                 "Screenshot 2026-01-11 at 10.00.00.png": f"API token {JWT}"}
 
         with mock.patch("aichivist.fulltext._ocr", side_effect=lambda p: (texts[p.name], "ocr")):
             rows = {r["file"]: r for r in triage.run(d)}
 
-        self.assertEqual(rows["Bildschirmfoto 2026-11-05 um 21.34.44.png"]["category"], "temporary")
-        self.assertEqual(rows["Screenshot 2026-11-03 at 15.47.05.png"]["category"], "sensitive")
+        self.assertEqual(rows["Bildschirmfoto 2026-01-13 um 12.00.00.png"]["category"], "temporary")
+        self.assertEqual(rows["Screenshot 2026-01-11 at 10.00.00.png"]["category"], "sensitive")
         self.assertEqual(rows["invoice.txt"]["category"], "document")
         self.assertIn("Invoice", rows["invoice.txt"]["suggested_name"])
         self.assertEqual(rows["Setup.dmg"]["category"], "installer")
